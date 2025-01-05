@@ -4,9 +4,8 @@ using namespace std;
 int findHighestDigit(int num) {
   int max = 0;
   while (num != 0) {
-    int remainder = num % 10;
-    if (remainder > max)
-      max = remainder;
+    if (num % 10 > max)
+      max = num % 10;
     num /= 10;
   }
   return max;
