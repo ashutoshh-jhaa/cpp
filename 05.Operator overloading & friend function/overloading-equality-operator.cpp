@@ -21,27 +21,61 @@ class Time {
             (t.minute * 60 + t.hour * 3600 + t.second));
   }
 
-  friend ostream& operator<<(ostream& o, Time t);
+  friend ostream& operator<<(ostream& o, const Time& t);
+  friend bool operator>>(istream& i, Time& t);
 };
 
-ostream& operator<<(ostream& o, Time t) {
-  o << t.hour << ":" << t.minute << ":" << t.second << endl;
+ostream& operator<<(ostream& o, const Time& t) {
+  o << t.hour << ":" << t.minute << ":" << t.second;
   return o;
+}
+
+bool operator>>(istream& i, Time& t) {
+  cout << "Enter Hours (0-23): ";
+  i >> t.hour;
+  if (t.hour < 0 || t.hour >= 24) {
+    return false;
+  }
+  cout << "Enter Minutes (0-59): ";
+  i >> t.minute;
+  if (t.minute < 0 || t.minute >= 60) {
+    return false;
+  }
+  cout << "Enter Seconds (0-59): ";
+  i >> t.second;
+  if (t.second < 0 || t.second >= 60) {
+    return false;
+  }
+
+  // Normalize time
+  t.minute += t.second / 60;
+  t.second %= 60;
+  t.hour += t.minute / 60;
+  t.minute %= 60;
+
+  return true;
 }
 
 int main() {
   Time t1(2, 42, 15), t2(8, 55, 32), t3(8, 55, 32);
+  Time t4, t5;
 
-  // Enable boolalpha to display true/false instead of 1/0 for boolean values
-  // Disable with cout << noboolalpha; if needed
-  cout << boolalpha;
+  cout << "Enter first Time:\n";
+  if (!(cin >> t4)) {
+    cout << "\nInvalid Time\n";
+    return 0;
+  }
+  cout << "Normalized Time: " << t4 << endl;
 
-  // Display Time objects
-  cout << t1 << t2;
+  cout << "\nEnter second Time:\n";
+  if (!(cin >> t5)) {
+    cout << "\nInvalid Time\n";
+    return 0;
+  }
+  cout << "Normalized Time: " << t5 << endl;
 
-  // Compare times and display the result
-  cout << "t1 == t2: " << (t1 == t2) << endl;  // false
-  cout << "t2 == t3: " << (t2 == t3) << endl;  // true
+  // Compare times
+  cout << ((t4 == t5) ? "Times are the same" : "Times are different") << endl;
 
   return 0;
 }
