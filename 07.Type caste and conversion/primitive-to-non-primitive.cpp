@@ -12,45 +12,45 @@ wap to convert primitive type to Complex type
 #include <iostream>
 using namespace std;
 
-class Complex {
+class complex {
  private:
   int real, img;
 
  public:
-  // Default constructor
-  Complex() { cout << "Default constructor called\n"; }
+  // default constructor
+  complex() { cout << "default constructor called\n"; }
 
-  // Conversion constructor (int -> Complex)
-  Complex(int r) : real(r), img(r) {
-    cout << "Conversion constructor (1 parameter) called\n";
+  // conversion constructor (int -> complex)
+  complex(int r) : real(r), img(r) {
+    cout << "conversion constructor (1 parameter) called\n";
   }
 
-  // Parameterized constructor (int, int -> Complex)
-  Complex(int r, int i) : real(r), img(i) {
-    cout << "Parameterized constructor (2 parameters) called\n";
+  // parameterized constructor (int, int -> complex)
+  complex(int r, int i) : real(r), img(i) {
+    cout << "parameterized constructor (2 parameters) called\n";
   }
 
-  // Overloaded assignment operator to convert int to Complex
+  // overloaded assignment operator to convert int to complex
   void operator=(int x) {
     real = img = x;
     cout << "operator= (int) called\n";
   }
 
-  // Display the Complex number
+  // display the complex number
   void display() const {
-    cout << "Real: " << real << endl;
-    cout << "Imaginary: " << img << endl;
+    cout << "real: " << real << endl;
+    cout << "imaginary: " << img << endl;
   }
 };
 
 int main() {
   int value = 23;
-  Complex c1;
+  complex c1;
 
-  // Using operator= to convert int to Complex
+  // using operator= to convert int to complex
   c1 = value;
 
-  // Display the result
+  // display the result
   c1.display();
 
   return 0;
