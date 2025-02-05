@@ -6,11 +6,10 @@ using namespace std;
 bool validateNumber(const char* str);
 
 int main() {
-  char number[11];
+  char number[12];
 
   cout << "Enter your Number: ";
-  cin.getline(number, 11);
-
+  cin.getline(number, 12);
   try {
     if (strlen(number) != 10) {
       throw "Number must be exactly 10 digits.";
