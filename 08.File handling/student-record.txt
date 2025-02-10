@@ -1,0 +1,10 @@
+Name : ashutosh
+Stream : maths
+Age : 20
+Roll-Number : 237
+
+Name : john
+Stream : commerce
+Age : 21
+Roll-Number : 238
+
