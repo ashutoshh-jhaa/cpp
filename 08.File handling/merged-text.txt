@@ -1,0 +1,67 @@
+#include <fstream>
+#include <iostream>
+using namespace std;
+int main() {
+  ofstream fout;
+  fout.open("./log.txt");
+  if (!fout) {
+    cout << "Something went wrong can't create new file";
+  } else {
+    cout << "File created successfully";
+
+    // this line will write into log.txt
+    fout << "This was written by cpp using file handling ";
+  }
+  fout.close();
+
+  ifstream fin;
+  string line;
+
+  fin.open("./log.txt");
+  if (!fin) {
+    cout << "can't open file ";
+  } else {
+    cout << "opened file successfully";
+    while (!fin.eof()) {  // eof stands for end of file
+      getline(fin, line);
+      cout << line;
+    }
+  }
+  fin.close();
+}
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+int main() {
+  string line;
+
+  // Open file in append mode to write
+  ofstream fout("./newfile.txt", ios::app);
+  if (!fout) {
+    cout << "Something went wrong\n";
+    return 1;
+  }
+
+  cout << "File opened successfully. Enter text: ";
+  getline(cin, line);
+  fout << line << "\n";  // Ensuring newline after writing
+  fout.close();          // Close file after writing
+
+  cout << "\nReading from file:\n";
+
+  // Now open file for reading
+  ifstream fin("./newfile.txt");
+  if (!fin) {
+    cout << "Can't read file\n";
+    return 1;
+  }
+
+  string newstr;
+  while (getline(fin, newstr)) {
+    cout << newstr << "\n";  // Read line by line
+  }
+
+  fin.close();  // Close file after reading
+  return 0;
+}
