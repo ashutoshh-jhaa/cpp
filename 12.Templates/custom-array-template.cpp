@@ -79,6 +79,56 @@ class Array {
     elements++;
   }
 
+  // delete element for given index
+  void deleteIndex(int index) {
+    // check for index out of bound
+    if (index < 0 || index >= elements) {
+      cout << "index out of bound" << endl;
+      return;
+    }
+
+    // shift elements to fill gap
+    for (int i = index; i < elements - 1; i++) {
+      array[i] = array[i + 1];
+    }
+
+    // reduce elements size
+    elements--;
+  }
+
+  // overloading [] operator
+  T operator[](int index) {
+    // check for index out of bound
+    if (index < 0 || index >= elements) {
+      cout << "index out of bound" << endl;
+      return 0;
+    }
+
+    // cout << "array[index]" << array[index];
+    return array[index];
+  }
+
+  // get number of elements
+  int length() { return elements; }
+
+  // get capacity of array
+  int capacity() { return size; }
+
+  // search and delete (delete first occurrence)
+  void searchDeleteElement(int value) {
+    // will add binary search afterwards
+    for (int i = 0; i < elements; i++) {
+      if (array[i] == value) {
+        deleteIndex(i);
+        cout << "Element " << array[i] << " deleted from index " << i << endl;
+        return;
+      }
+    }
+
+    cout << "Element Not found !" << endl;
+  }
+
+  // displays array elements
   void display() {
     if (elements == 0) {
       cout << "Array is Empty!" << endl;
@@ -86,7 +136,7 @@ class Array {
     }
 
     for (int i = 0; i < elements; i++) {
-      cout << "Array [" << i << "] : " << array[i] << endl << endl;
+      cout << "Array [" << i << "] : " << array[i] << endl;
     }
   }
 
@@ -101,14 +151,34 @@ int main() {
   a.push(2);
   a.push(8);
 
-  cout << "array after pushing 5 elements" << endl;
+  cout << "array after pushing 5 an elements" << endl;
   a.display();
 
-  cout << "array after poping element" << endl;
+  cout << "array after poping an element" << endl;
   a.pop();
   a.display();
 
-  cout << "array after inserting element at an index" << endl;
+  cout << "array after inserting an element at an index" << endl;
   a.insert(99, 2);
+  a.display();
+
+  cout << "array after deleting an element from an index" << endl;
+  a.deleteIndex(2);
+  a.display();
+
+  // overloading of [] operator
+  cout << "Overloading of []" << endl;
+  for (int i = 0; i < a.length(); i++) {
+    cout << "Array [" << i << "] : " << a[i] << endl;
+  }
+
+  // length and capacity of the array;
+  cout << "Lenght and capacity of the array" << endl;
+  cout << "Capacity : " << a.capacity() << endl;
+  cout << "Length : " << a.length() << endl;
+
+  // search and delete element
+  a.searchDeleteElement(45);
+  a.searchDeleteElement(2);
   a.display();
 }
